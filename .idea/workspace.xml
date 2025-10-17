@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="559069d1-32cf-459c-a1f4-fe34f783952b" name="Changes" comment="лаба 3">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/python_labs-main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab02/03 2.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab02/03 2.py" afterDir="false" />
-    </list>
+    <list default="true" id="559069d1-32cf-459c-a1f4-fe34f783952b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,7 +61,7 @@
     "Python.text.executor": "Run",
     "Python.text_stats.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/maksim/Desktop/python_labs"
   }
 }]]></component>
@@ -118,6 +109,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="лаба 2" />
     <MESSAGE value="лаба 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="лаба 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>
