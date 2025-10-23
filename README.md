@@ -283,26 +283,35 @@ def format_record(rec: tuple[str, str, float]) -> str:
 ```
 import re
 from collections import Counter
+from typing import Dict, List, Tuple
+
+_WORD_RE = re.compile(r"\w+(?:-\w+)*", flags=re.UNICODE)
+_WS_NL_RE = re.compile(r"[\t\r\n]+")
+_WS_RE = re.compile(r"\s+")
+
 
 def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
+    if yo2e:
+        text = text.replace("ё", "е").replace("Ё", "Е")
     if casefold:
         text = text.casefold()
-    if yo2e:
-        text = text.replace('ё', 'е').replace('Ё', 'Е')
-    text = re.sub(r'[\t\r\n]+', ' ', text)
-    text = re.sub(r'\s+', ' ', text).strip()
+    text = _WS_NL_RE.sub(" ", text)
+    text = _WS_RE.sub(" ", text).strip()
     return text
 
-def tokenize(text: str) -> list[str]:
-    return re.findall(r'\w+(?:-\w+)*', text)
 
-def count_freq(tokens: list[str]) -> dict[str, int]:
+def tokenize(text: str) -> List[str]:
+    return _WORD_RE.findall(text)
+
+
+def count_freq(tokens: List[str]) -> Dict[str, int]:
     return dict(Counter(tokens))
 
-def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
-    return sorted(freq.items(), key=lambda x: (-x[1], x[0]))[:n]
 
-if __name__ == "__main__":
+def top_n(freq: Dict[str, int], n: int = 5) -> List[Tuple[str, int]]:
+    if n <= 0:
+        return []
+    return sorted(freq.items(), key=lambda kv: (-kv[1], kv[0]))[:n]
 ```
 
 ![фото1 3](./images/lab03/01.png)
@@ -310,27 +319,30 @@ if __name__ == "__main__":
 ### Задание 2
 
 ```
-if __name__ == "__main__" and __package__ is None:
-    __package__ = "src.lab03"
-
-from ..lib.text import normalize, tokenize, count_freq, top_n
+from __future__ import annotations
 
 import sys
-import io
+from pathlib import Path
 
-def main():
-    text = io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8').read()
-    print(f"Входной текст (raw): '{text}'")
-    norm_text = normalize(text)
-    tokens = tokenize(norm_text)
+sys.path.append(str(Path(__file__).resolve().parents[1]))
+
+from lib.text import normalize, tokenize, count_freq, top_n
+
+
+def main() -> None:
+    # Читаем весь stdin до EOF
+    data = sys.stdin.read()
+
+    norm = normalize(data)
+    tokens = tokenize(norm)
     freq = count_freq(tokens)
-    top = top_n(freq, 5)
+    top = top_n(freq, n=5)
 
     print(f"Всего слов: {len(tokens)}")
     print(f"Уникальных слов: {len(freq)}")
     print("Топ-5:")
-    for word, count in top:
-        print(f"{word}:{count}")
+    for word, cnt in top:
+        print(f"{word}:{cnt}")
 
 
 if __name__ == "__main__":
