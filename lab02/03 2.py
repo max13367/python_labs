@@ -29,6 +29,7 @@ def format_record(rec: tuple[str, str, float]) -> str:
     for i in new_fam:
         initial.append(i[0] + '.')
 
+
     initials_str = ''.join(initial)
     fio = f'{familiya} {initials_str}, гр. {gruppa}, GPA {gpa:.2f}'
     return fio
