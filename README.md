@@ -294,14 +294,11 @@ def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
     text = re.compile(r"\s+").sub(" ", text).strip()
     return text
 
-
 def tokenize(text: str) -> List[str]:
-    return re.compile(r"\w+(?:-\w+)*", flags=re.UNICODE).findall(text)
-
+    return re.compile(r"[^\W_]+(?:-[^\W_]+)*", flags=re.UNICODE).findall(text)
 
 def count_freq(tokens: List[str]) -> Dict[str, int]:
     return dict(Counter(tokens))
-
 
 def top_n(freq: Dict[str, int], n: int = 5) -> List[Tuple[str, int]]:
     if n <= 0:
