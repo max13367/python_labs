@@ -9,7 +9,6 @@ from lib.text import normalize, tokenize, count_freq, top_n
 
 
 def main() -> None:
-    # Читаем весь stdin до EOF
     data = sys.stdin.read()
 
     norm = normalize(data)
