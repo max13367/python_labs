@@ -285,23 +285,18 @@ import re
 from collections import Counter
 from typing import Dict, List, Tuple
 
-_WORD_RE = re.compile(r"\w+(?:-\w+)*", flags=re.UNICODE)
-_WS_NL_RE = re.compile(r"[\t\r\n]+")
-_WS_RE = re.compile(r"\s+")
-
-
 def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
     if yo2e:
         text = text.replace("ё", "е").replace("Ё", "Е")
     if casefold:
         text = text.casefold()
-    text = _WS_NL_RE.sub(" ", text)
-    text = _WS_RE.sub(" ", text).strip()
+    text = re.compile(r"[\t\r\n]+").sub(" ", text)
+    text = re.compile(r"\s+").sub(" ", text).strip()
     return text
 
 
 def tokenize(text: str) -> List[str]:
-    return _WORD_RE.findall(text)
+    return re.compile(r"\w+(?:-\w+)*", flags=re.UNICODE).findall(text)
 
 
 def count_freq(tokens: List[str]) -> Dict[str, int]:
@@ -330,7 +325,6 @@ from lib.text import normalize, tokenize, count_freq, top_n
 
 
 def main() -> None:
-    # Читаем весь stdin до EOF
     data = sys.stdin.read()
 
     norm = normalize(data)
@@ -509,7 +503,6 @@ def generate_multi_file_report(input_files: list, per_file_output: str,
 def main():
     parser = argparse.ArgumentParser(description='Анализ текстовых файлов и генерация отчетов')
 
-    # Основные аргументы
     parser.add_argument('--in', dest='input_files', nargs='+',
                         help='Входные файлы для анализа')
     parser.add_argument('--out', dest='output_file',
@@ -518,7 +511,6 @@ def main():
     parser.add_argument('--encoding', default='utf-8',
                         help='Кодировка файлов (по умолчанию: utf-8)')
 
-    # Аргументы для режима нескольких файлов
     parser.add_argument('--per-file', dest='per_file_output',
                         help='Путь для отчета по каждому файлу (режим нескольких файлов)')
     parser.add_argument('--total', dest='total_output',
