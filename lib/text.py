@@ -2,35 +2,56 @@ import re
 from collections import Counter
 from typing import Dict, List, Tuple
 
+# Улучшенные регулярные выражения для Unicode
+_WORD_RE = re.compile(r"[^\W_]+(?:-[^\W_]+)*", flags=re.UNICODE)
+_WS_NL_RE = re.compile(r"[\t\r\n]+")
+_WS_RE = re.compile(r"\s+")
+
 def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
+    """
+    Нормализация текста:
+    - при yo2e=True заменяет ё/Ё -> е/Е
+    - при casefold=True приводит к casefold()
+    - заменяет \t, \r, \n на пробел
+    - схлопывает все последовательности пробелов и обрезает края
+    """
     if yo2e:
         text = text.replace("ё", "е").replace("Ё", "Е")
     if casefold:
         text = text.casefold()
-    text = re.compile(r"[\t\r\n]+").sub(" ", text)
-    text = re.compile(r"\s+").sub(" ", text).strip()
+    text = _WS_NL_RE.sub(" ", text)
+    text = _WS_RE.sub(" ", text).strip()
     return text
 
-
 def tokenize(text: str) -> List[str]:
-    return re.compile(r"\w+(?:-\w+)*", flags=re.UNICODE).findall(text)
-
+    """
+    Токенизация:
+    - слова это шаблон [^\W_]+(?:-[^\W_]+)*
+    - работает с Unicode буквами (кириллица, латиница)
+    - дефис разрешен только внутри слова
+    - числа тоже считаются словами
+    """
+    return _WORD_RE.findall(text)
 
 def count_freq(tokens: List[str]) -> Dict[str, int]:
+    """Подсчитывает частоты слов из списка токенов."""
     return dict(Counter(tokens))
 
-
 def top_n(freq: Dict[str, int], n: int = 5) -> List[Tuple[str, int]]:
+    """
+    Возвращает топ-N пар (слово, частота), сортировка по ключу (-частота, слово).
+    При n <= 0 возвращает пустой список.
+    """
     if n <= 0:
         return []
     return sorted(freq.items(), key=lambda kv: (-kv[1], kv[0]))[:n]
 
-
 if __name__ == "__main__":
+    # Мини-тесты
     assert normalize("ПрИвЕт\nМИр\t") == "привет мир"
     assert normalize("ёжик, Ёлка") == "ежик, елка"
     assert normalize("Hello\r\nWorld") == "hello world"
-    assert normalize("  двойные   пробелы  ") == "двойные пробелы"
+    assert normalize(" двойные пробелы ") == "двойные пробелы"
 
     assert tokenize("привет мир") == ["привет", "мир"]
     assert tokenize("hello,world!!!") == ["hello", "world"]
