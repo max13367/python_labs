@@ -347,192 +347,177 @@ if __name__ == "__main__":
 ### Задание 1
 
 ```
-import csv
 from pathlib import Path
-from typing import Iterable, Sequence, Union
+import csv
+from typing import Iterable, Sequence
 
-
-def read_text(path: Union[str, Path], encoding: str = "utf-8") -> str:
+def read_text(path: str | Path, encoding: str = "utf-8") -> str:
+    """Считывает текст из .txt файла"""
     p = Path(path)
-    return p.read_text(encoding=encoding)
+    if p.suffix.lower() != ".txt":
+        raise ValueError("Неправильный формат — требуется файл с расширением txt.")
+    try:
+        return p.read_text(encoding=encoding)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Файл не найден: {p}")
+    except UnicodeDecodeError:
+        raise UnicodeDecodeError("Ошибка декодирования. Попробуйте другую кодировку.")
 
 
-def write_csv(rows: Iterable[Sequence], path: Union[str, Path],
-              header: tuple[str, ...] | None = None) -> None:
+def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...] | None = None) -> None:
     p = Path(path)
-    rows_list = list(rows)
+    if p.suffix.lower() != ".csv":
+        raise ValueError("Неправильный формат — требуется файл с расширением .csv")
 
-    if rows_list:
-        first_len = len(rows_list[0])
-        for i, row in enumerate(rows_list):
-            if len(row) != first_len:
-                raise ValueError(f"Строка {i} имеет длину {len(row)}, ожидалась {first_len}")
+    rows = list(rows)
+    if rows:
+        length = len(rows[0])
+        for r in rows:
+            if len(r) != length:
+                raise ValueError("Все строки должны иметь одинаковую длину")
 
-    ensure_parent_dir(p)
+    if header is not None and rows:
+        if len(header) != len(rows[0]):
+            raise ValueError("Длина заголовка не совпадает с длиной строк данных")
 
     with p.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
+        w = csv.writer(f)
         if header is not None:
-            writer.writerow(header)
-        writer.writerows(rows_list)
+            w.writerow(header)
+        for r in rows:
+            w.writerow(r)
 
+# Тестовые задания
 
-def ensure_parent_dir(path: Union[str, Path]) -> None:
-    p = Path(path)
-    p.parent.mkdir(parents=True, exist_ok=True)
+if __name__ == "__main__":
+    # Задание A
+    Path("data").mkdir(exist_ok=True)
+    (Path("data") / "input.txt").write_text("Привет, мир! Привет!!!", encoding="utf-8")
+    print("Файл data/input.txt создан")
+
+    # Задание B
+    def print_csv(path):
+        p = Path(path)
+        with p.open('r', encoding='utf-8') as f:
+            for line in f:
+                print(line.strip())
+
+    write_csv([], "data/empty.csv", header=("a", "b"))
+    print_csv("data/empty.csv")
+
+    write_csv([("word", "count"), ("test", 3)], "data/check.csv")
+    print_csv("data/check.csv")
+
+    txt = read_text(Path("data") / "input.txt")
+    print("Содержимое input.txt:", txt)
+    csv_path = Path("data") / "report.csv"
+    write_csv([("word", "count"), ("привет", 2)], csv_path, header=("word", "count"))
+    print("Создан CSV:", csv_path)
+
+    try:
+        (Path("data") / "1251input.txt").write_text("Привет из cp1251", encoding="cp1251")
+        str_cp1251 = read_text("data/1251input.txt", encoding='cp1251')
+        print("Прочитано из cp1251:", str_cp1251)
+    except Exception as e:
+        print("Ошибка при чтении cp1251 файла:", e)
 ```
 
-![фото1 4](./images/lab04/01.png)
+
+### При больших файлах читаем построчно, не переделывая все строки в список
+
+```
+def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...] | None = None) -> None:
+    p = Path(path)
+    if p.suffix.lower() != ".csv":
+        raise ValueError("Неправильный формат — требуется файл с расширением .csv")
+
+    rows = list(rows)
+    if rows:
+        length = len(rows[0])
+        for r in rows:
+            if len(r) != length:
+                raise ValueError("Все строки должны иметь одинаковую длину")
+
+    if header is not None and rows:
+        if len(header) != len(rows[0]):
+            raise ValueError("Длина заголовка не совпадает с длиной строк данных")
+
+    with p.open("w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        if header is not None:
+            w.writerow(header)
+        for r in rows:
+            w.writerow(r)
+```
+### Создание папки data и файла input.txt
+```
+from pathlib import Path
+Path("data").mkdir(exist_ok=True)
+Path("data")/ "input.txt".write_text("Привет, мир! Привет!!!", encoding="utf-8")
+csv_path = Path("data") / "check.csv"
+write_csv([("word", "count"), ("test", 3)], csv_path)
+print(csv_path)
+
+```
+### Чтение кодировки 1251
+```
+    try:
+        (Path("data") / "1251input.txt").write_text("Привет из cp1251", encoding="cp1251")
+        str_cp1251 = read_text("data/1251input.txt", encoding='cp1251')
+        print("Прочитано из cp1251:", str_cp1251)
+    except Exception as e:
+        print("Ошибка при чтении cp1251 файла:", e)
+```
+![фото1 4](./images/lab04/04.png)
+
+### Чтение пустого файла
+![фото1 4](./images/lab04/03.png)
+
+### Чтение текста в другой кодировке
+![фото1 4](./images/lab04/05.png)
+
+### Чтение текста в другом формате
+![фото1 4](./images/lab04/06.png)
 
 ### Задание 2
-
 ```
-import sys
-import argparse
 from pathlib import Path
 from collections import Counter
+from src.lib.text import normalize, tokenize, top_n
+from src.lab04.io_txt_csv import read_text, write_csv
 
-sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from lib.text import normalize, tokenize, top_n
-from lab04.io_txt_csv import read_text, write_csv
 
+try:
+    text = read_text(Path("data/input.txt"))
+except FileNotFoundError:
+    print(f"Файл не найден: {Path("data/input.txt")}")
+    raise
+except UnicodeDecodeError:
+    print(f"Ошибка кодировки при чтении файла: {Path("data/input.txt")}")
+    raise
 
 def frequencies_from_text(text: str) -> dict[str, int]:
-    normalized_text = normalize(text)
-    tokens = tokenize(normalized_text)
-    return Counter(tokens)
-
+    from src.lib.text import normalize, tokenize, top_n # из ЛР3
+    tokens = tokenize(normalize(text))
+    return Counter(tokens) # dict-like
 
 def sorted_word_counts(freq: dict[str, int]) -> list[tuple[str, int]]:
     return sorted(freq.items(), key=lambda kv: (-kv[1], kv[0]))
 
+text=sorted_word_counts(frequencies_from_text(read_text("data/input.txt")))
+write_csv(text, "data/report.csv", header=("word", "count"))
 
-def print_formatted_table(freq: dict[str, int], title: str = "Статистика слов"):
-    sorted_items = sorted_word_counts(freq)
-    if not sorted_items:
-        print("Нет данных для отображения")
-        return
+tekst = read_text("data/input.txt")
+tokens = (tokenize(normalize(tekst)))
+count=Counter(tokens)
+sorted_freq = sorted_word_counts(count)
 
-    max_word_len = max(len(word) for word, _ in sorted_items)
-    max_count_len = max(len(str(count)) for _, count in sorted_items)
-
-    print(f"\n{title}")
-    print("=" * (max_word_len + max_count_len + 5))
-
-    for word, count in sorted_items:
-        print(f"{word:<{max_word_len}} | {count:>{max_count_len}}")
-
-    print()
-
-
-def generate_single_file_report(input_file: str, output_file: str, encoding: str = "utf-8") -> None:
-    try:
-        text = read_text(input_file, encoding)
-        freq = frequencies_from_text(text)
-        sorted_freq = sorted_word_counts(freq)
-
-        write_csv(sorted_freq, output_file, header=("word", "count"))
-
-        total_words = sum(freq.values())
-        unique_words = len(freq)
-        top_words = top_n(freq, 5)
-
-        print(f"Файл: {input_file}")
-        print(f"Всего слов: {total_words}")
-        print(f"Уникальных слов: {unique_words}")
-
-        print_formatted_table(freq, f"Топ-слов из {input_file}")
-
-        print(f"Отчет сохранен: {output_file}")
-
-    except FileNotFoundError:
-        print(f"Ошибка: Файл '{input_file}' не найден")
-        sys.exit(1)
-    except UnicodeDecodeError as e:
-        print(f"Ошибка декодирования: {e}")
-        print("Попробуйте указать правильную кодировку через --encoding")
-        sys.exit(1)
-
-
-def generate_multi_file_report(input_files: list, per_file_output: str,
-                               total_output: str, encoding: str = "utf-8") -> None:
-    all_freq = Counter()
-    per_file_data = []
-    processed_files = 0
-
-    for file_path in sorted(input_files):
-        try:
-            text = read_text(file_path, encoding)
-            freq = frequencies_from_text(text)
-            all_freq.update(freq)
-
-            for word, count in sorted_word_counts(freq):
-                per_file_data.append((str(file_path), word, count))
-
-            processed_files += 1
-            print(f"✓ Обработан: {file_path} (слов: {sum(freq.values())}, уникальных: {len(freq)})")
-
-        except FileNotFoundError:
-            print(f"✗ Ошибка: Файл '{file_path}' не найден, пропускаем")
-        except UnicodeDecodeError as e:
-            print(f"✗ Ошибка декодирования в файле '{file_path}': {e}")
-
-    if processed_files == 0:
-        print("Не удалось обработать ни одного файла")
-        sys.exit(1)
-
-    write_csv(per_file_data, per_file_output, header=("file", "word", "count"))
-
-    write_csv(sorted_word_counts(all_freq), total_output, header=("word", "count"))
-
-    print(f"\nИтоговая статистика:")
-    print(f"Обработано файлов: {processed_files}")
-    print(f"Всего уникальных слов: {len(all_freq)}")
-    print(f"Общее количество слов: {sum(all_freq.values())}")
-
-    print_formatted_table(all_freq, "Сводная статистика по всем файлам")
-
-    print(f"Отчет по файлам сохранен: {per_file_output}")
-    print(f"Сводный отчет сохранен: {total_output}")
-
-
-def main():
-    parser = argparse.ArgumentParser(description='Анализ текстовых файлов и генерация отчетов')
-
-    parser.add_argument('--in', dest='input_files', nargs='+',
-                        help='Входные файлы для анализа')
-    parser.add_argument('--out', dest='output_file',
-                        default='data/lab04/report.csv',
-                        help='Путь для сохранения отчета (для одного файла)')
-    parser.add_argument('--encoding', default='utf-8',
-                        help='Кодировка файлов (по умолчанию: utf-8)')
-
-    parser.add_argument('--per-file', dest='per_file_output',
-                        help='Путь для отчета по каждому файлу (режим нескольких файлов)')
-    parser.add_argument('--total', dest='total_output',
-                        help='Путь для сводного отчета (режим нескольких файлов)')
-
-    args = parser.parse_args()
-
-    if args.per_file_output or args.total_output:
-        if not args.input_files:
-            print("Ошибка: для режима нескольких файлов укажите --in с списком файлов")
-            sys.exit(1)
-
-        per_file_out = args.per_file_output or 'data/lab04/report_per_file.csv'
-        total_out = args.total_output or 'data/lab04/report_total.csv'
-
-        generate_multi_file_report(args.input_files, per_file_out, total_out, args.encoding)
-
-    else:
-        input_file = args.input_files[0] if args.input_files else 'data/lab04/input.txt'
-        generate_single_file_report(input_file, args.output_file, args.encoding)
-
-
-if __name__ == "__main__":
-    main()
+print(f"Всего слов: {len(tokens)}")
+print(f"Уникальных слов: {len(count)}")
+print(f"Топ-5:")
+for word, col in sorted_freq[:5]:
+    print(f"{word}:{col}")
 ```
-
-![фото2 4](./images/lab04/02.png)
-![фото2 5](./images/lab04/03.png)
+![фото1 4](./images/lab04/01.png)
+![фото1 4](./images/lab04/02.png)

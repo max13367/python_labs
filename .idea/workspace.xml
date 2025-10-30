@@ -5,10 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="559069d1-32cf-459c-a1f4-fe34f783952b" name="Changes" comment="лаба4">
+      <change afterPath="$PROJECT_DIR$/images/lab04/04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab04/05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab04/06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab04/data/1251input.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab04/data/empty_input.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab04/data/input.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lab03/02.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lab03/02.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/lab04/01.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lab04/01.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/lab04/02.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lab04/02.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/lab04/03.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lab04/03.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lab04/io_txt_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab04/io_txt_csv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lab04/text_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab04/text_report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/text.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/text.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_io.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +138,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761266686124</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="лаба4">
+      <option name="closed" value="true" />
+      <created>1761304268276</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1761304268276</updated>
+    </task>
+    <task id="LOCAL-00006" summary="лаба4">
+      <option name="closed" value="true" />
+      <created>1761304446427</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1761304446427</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="UnknownFeatures">
