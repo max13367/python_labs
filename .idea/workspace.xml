@@ -5,7 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="559069d1-32cf-459c-a1f4-fe34f783952b" name="Changes" comment="лаба4">
+      <change afterPath="$PROJECT_DIR$/images/lab05/01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/07.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/08.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/09.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab05/15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/csv_xlsx.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/data2/out/cities.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/data2/out/dict1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/data2/out/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/data2/out/people1.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/data2/out/people_from_csv.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/data2/out/people_test.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/cities.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/dic1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/dict1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/people.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/people_empty.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/people_empty.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/test1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lab05/json_csv.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +58,7 @@
       </map>
     </option>
     <option name="RECENT_COMMON_BRANCH" value="main" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -60,18 +92,26 @@
     "Python.02 2.executor": "Run",
     "Python.02.executor": "Run",
     "Python.03 2.executor": "Run",
+    "Python.csv_xlsx.executor": "Run",
     "Python.io_txt_csv.executor": "Run",
+    "Python.json_csv.executor": "Run",
     "Python.test_io.executor": "Run",
     "Python.text.executor": "Run",
     "Python.text_report.executor": "Run",
     "Python.text_stats.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Users/maksim/Desktop/python_labs"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "PLAIN_TEXT"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\maksim\Desktop\python_labs\src\lab05\data2\out" />
       <recent name="C:\Users\maksim\Desktop\python_labs\images\lab02" />
       <recent name="C:\Users\maksim\Desktop\python_labs\images\lab01" />
     </key>

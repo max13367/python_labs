@@ -521,3 +521,202 @@ for word, col in sorted_freq[:5]:
 ```
 ![фото1 4](./images/lab04/01.png)
 ![фото1 4](./images/lab04/02.png)
+
+## Лабораторная работа 5
+
+### Задание 1
+
+```
+from pathlib import Path
+import json
+import csv
+
+def json_to_csv(json_path: str, csv_path: str) -> None:
+    p_json = Path(json_path)
+    p_csv = Path(csv_path)
+
+    if p_json.suffix.lower() != ".json":
+        raise ValueError("Ожидается файл с расширением .json")
+    if p_csv.suffix.lower() != ".csv":
+        raise ValueError("Ожидается файл с расширением .csv")
+
+    if not p_json.exists():
+        raise FileNotFoundError("Файл JSON не найден")
+
+    if not p_csv.parent.exists():
+        raise FileNotFoundError(f"Директория для CSV не найдена")
+
+    try:
+        data = json.loads(p_json.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        raise ValueError("Ошибка чтения JSON")
+
+    if not data or not isinstance(data, list):
+        raise ValueError("Пустой JSON")
+    if not all(isinstance(item, dict) for item in data):
+        raise ValueError("JSON должен содержать список словарей")
+
+    # Определяем все возможные ключи
+    keys = list(data[0].keys())
+    for d in data[1:]:
+        for k in d.keys():
+            if k not in keys:
+                keys.append(k)
+
+    # Запись CSV
+    with p_csv.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=keys)
+        writer.writeheader()
+        for row in data:
+            writer.writerow({k: row.get(k, "") for k in keys})
+
+    with p_csv.open("r", encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f)
+        csv_data = list(reader)
+        if len(csv_data) != len(data):
+            raise ValueError("Количество записей не совпадает после конвертации")
+
+
+def csv_to_json(csv_path: str, json_path: str) -> None:
+    p_csv = Path(csv_path)
+    p_json = Path(json_path)
+
+    if p_csv.suffix.lower() != ".csv":
+        raise ValueError("Ожидается файл с расширением .csv")
+    if p_json.suffix.lower() != ".json":
+        raise ValueError("Ожидается файл с расширением .json")
+
+    if not p_csv.exists():
+        raise FileNotFoundError("Файл CSV не найден")
+
+    if not p_json.parent.exists():
+        raise FileNotFoundError(f"Директория для JSON не найдена")
+
+    # Чтение CSV
+    with p_csv.open("r", encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f)
+        if not reader.fieldnames:
+            raise ValueError("CSV должен содержать заголовок")
+        data = [row for row in reader]
+
+    if not data:
+        raise ValueError("CSV пустой")
+
+    # Запись JSON
+    with p_json.open("w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+    reread = json.loads(p_json.read_text(encoding="utf-8"))
+    if len(reread) != len(data):
+        raise ValueError("Количество записей не совпадает после конвертации")
+```
+### Ошибки 
+#### Пустой json
+![фото1 5](./images/lab05/01.png)
+#### Другое расширение(не json)
+![фото1 5](./images/lab05/02.png)
+#### Нету файла json
+![фото1 5](./images/lab05/03.png)
+#### Другое расширение(не csv)
+![фото1 5](./images/lab05/04.png)
+#### Нету загаловка csv
+![фото1 5](./images/lab05/05.png)
+#### Нету файла csv
+![фото1 5](./images/lab05/07.png)
+#### json не содержит список словарей
+![фото1 5](./images/lab05/08.png)
+
+### Задание 2
+
+```
+from pathlib import Path
+import csv
+from openpyxl import Workbook
+
+def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
+    p_csv = Path(csv_path)
+    p_xlsx = Path(xlsx_path)
+    # Проверки путей
+    if p_csv.suffix.lower() != ".csv":
+        raise ValueError("Ожидается файл с расширением .csv")
+    if p_xlsx.suffix.lower() != ".xlsx":
+        raise ValueError("Ожидается файл с расширением .xlsx")
+
+    if not p_csv.exists():
+        raise FileNotFoundError("Файл CSV не найден")
+
+    # Чтение CSV
+    with p_csv.open("r", encoding="utf-8", newline="") as f:
+        reader = csv.reader(f)
+        rows = list(reader)
+
+    # Проверка содержимого
+    if not rows or all(not any(row) for row in rows):
+        raise ValueError("Пустой CSV или неподдерживаемая структура")
+
+    # Создание XLS
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Sheet1"
+
+    for row in rows:
+        ws.append(row)
+
+    # Автоширина
+    for col in ws.columns:
+        max_len = max(len(str(cell.value or "")) for cell in col)
+        col_letter = col[0].column_letter
+        ws.column_dimensions[col_letter].width = max(max_len + 2, 8)
+
+    # Проверка директории назначения
+    if not p_xlsx.parent.exists():
+        raise FileNotFoundError(f"Директория для XLSX не найдена")
+
+    # Сохранение
+    wb.save(p_xlsx)
+#ПРИМЕР
+    # Конвертация people.csv → people.xlsx
+csv_to_xlsx("data2/samples/people.csv", "data2/out/people1.xlsx")
+
+csv_input = Path("data2/samples/cities.csv")
+xlsx_output = Path("data2/out/cities.xlsx")
+
+# Создаём папку out, если её нет
+xlsx_output.parent.mkdir(parents=True, exist_ok=True)
+csv_input.parent.mkdir(parents=True, exist_ok=True)
+
+# Записываем пример в CSV
+example_rows = [
+    ["city", "country", "language"],
+    ["Moscow", "Russia", "Russian"],
+    ["Tokyo", "Japan", "Japanese"],
+    ["Paris", "France", "French"],
+]
+with csv_input.open("w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerows(example_rows)
+
+# Конвертация CSV → XLSX
+csv_to_xlsx(csv_input, xlsx_output)
+
+csv_to_xlsx("data2/samples/people_empty.csv", "data2/samples/people2.xlsx")
+#csv_to_xlsx("data2/samples/people_NO_file.csv", "data/samples/people3.xlsx")
+#csv_to_xlsx("data2/samples/tupy.csv", "data/samples/people3.json")
+
+```
+### Ошибки 
+#### Пустой csv
+![фото1 5](./images/lab05/09.png)
+#### Нету файла csv
+![фото1 5](./images/lab05/10.png)
+#### Другое расширение(не xlsx)
+![фото1 5](./images/lab05/11.png)
+
+### Пример работы json_csv
+![фото1 5](./images/lab05/12.png)
+![фото1 5](./images/lab05/13.png)
+
+### Пример работы csv_xlsx
+![фото1 5](./images/lab05/14.png)
+![фото1 5](./images/lab05/15.png)
+
