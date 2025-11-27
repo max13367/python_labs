@@ -4,40 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="559069d1-32cf-459c-a1f4-fe34f783952b" name="Changes" comment="лаба4">
-      <change afterPath="$PROJECT_DIR$/images/lab05/01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/02.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/03.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/04.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/06.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/07.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/08.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/09.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/10.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/11.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/12.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/13.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/14.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab05/15.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/csv_xlsx.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/data2/out/cities.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/data2/out/dict1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/data2/out/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/data2/out/people1.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/data2/out/people_from_csv.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/data2/out/people_test.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/cities.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/dic1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/dict1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/people.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/people_empty.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/people_empty.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/data2/samples/test1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab05/json_csv.py" afterDir="false" />
+    <list default="true" id="559069d1-32cf-459c-a1f4-fe34f783952b" name="Changes" comment="лаба5">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +20,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$/src" value="main" />
@@ -84,31 +58,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.01 1.executor": "Run",
-    "Python.01 2.executor": "Run",
-    "Python.01.executor": "Run",
-    "Python.02 2.executor": "Run",
-    "Python.02.executor": "Run",
-    "Python.03 2.executor": "Run",
-    "Python.csv_xlsx.executor": "Run",
-    "Python.io_txt_csv.executor": "Run",
-    "Python.json_csv.executor": "Run",
-    "Python.test_io.executor": "Run",
-    "Python.text.executor": "Run",
-    "Python.text_report.executor": "Run",
-    "Python.text_stats.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/maksim/Desktop/python_labs"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.01 1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.01 2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.01.executor&quot;: &quot;Run&quot;,
+    &quot;Python.02 2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.02.executor&quot;: &quot;Run&quot;,
+    &quot;Python.03 2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.csv_xlsx.executor&quot;: &quot;Run&quot;,
+    &quot;Python.io_txt_csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.json_csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_io.executor&quot;: &quot;Run&quot;,
+    &quot;Python.text.executor&quot;: &quot;Run&quot;,
+    &quot;Python.text_report.executor&quot;: &quot;Run&quot;,
+    &quot;Python.text_stats.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/maksim/Desktop/python_labs&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "PLAIN_TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;PLAIN_TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\maksim\Desktop\python_labs\src\lab05\data2\out" />
@@ -188,7 +162,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761850859627</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="лаба5">
+      <option name="closed" value="true" />
+      <created>1763680723124</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1763680723124</updated>
+    </task>
+    <task id="LOCAL-00009" summary="лаба5">
+      <option name="closed" value="true" />
+      <created>1763680807687</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1763680807687</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -198,6 +188,7 @@
     <MESSAGE value="лаба 2" />
     <MESSAGE value="лаба 3" />
     <MESSAGE value="лаба4" />
-    <option name="LAST_COMMIT_MESSAGE" value="лаба4" />
+    <MESSAGE value="лаба5" />
+    <option name="LAST_COMMIT_MESSAGE" value="лаба5" />
   </component>
 </project>
