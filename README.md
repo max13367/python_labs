@@ -721,3 +721,110 @@ csv_to_xlsx("data2/samples/people_empty.csv", "data2/samples/people2.xlsx")
 ![фото1 5](./images/lab05/14.png)
 ![фото1 5](./images/lab05/15.png)
 
+
+## Лабораторная работа 6
+
+### Задание 1
+
+```
+import argparse
+import os
+from src.lab05.json_csv import json_to_csv, csv_to_json
+from src.lab05.csv_xlsx import csv_to_xlsx
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Конвертация форматов данных")
+    commands = parser.add_subparsers(dest="action", required=True)
+
+    # JSON → CSV
+    c_json = commands.add_parser("json2csv", help="Преобразовать JSON в CSV")
+    c_json.add_argument("--in", dest="src", required=True, help="Входной JSON файл")
+    c_json.add_argument("--out", dest="dst", required=True, help="Куда сохранить CSV")
+
+    # CSV → JSON
+    c_csv = commands.add_parser("csv2json", help="Преобразовать CSV в JSON")
+    c_csv.add_argument("--in", dest="src", required=True, help="Входной CSV файл")
+    c_csv.add_argument("--out", dest="dst", required=True, help="Куда сохранить JSON")
+
+    # CSV → XLSX
+    c_xlsx = commands.add_parser("csv2xlsx", help="Преобразовать CSV в XLSX")
+    c_xlsx.add_argument("--in", dest="src", required=True, help="Входной CSV файл")
+    c_xlsx.add_argument("--out", dest="dst", required=True, help="Куда сохранить XLSX")
+
+    opts = parser.parse_args()
+
+    if not os.path.isfile(opts.src):
+        raise FileNotFoundError(f"Файл '{opts.src}' не найден")
+
+    if opts.action == "json2csv":
+        json_to_csv(opts.src, opts.dst)
+    elif opts.action == "csv2json":
+        csv_to_json(opts.src, opts.dst)
+    elif opts.action == "csv2xlsx":
+        csv_to_xlsx(opts.src, opts.dst)
+    else:
+        parser.error("Неизвестная операция")
+
+
+if __name__ == "__main__":
+    main()
+
+```
+### Задание 2
+
+```
+import argparse
+from src.lib.text import tokenize, count_freq, top_n
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Инструмент для работы с текстовыми файлами")
+    cmds = parser.add_subparsers(dest="mode")
+
+    # cat
+    cmd_cat = cmds.add_parser("cat", help="Показать файл целиком")
+    cmd_cat.add_argument("--file", required=True, help="Файл для чтения")
+    cmd_cat.add_argument("-n", "--nums", action="store_true", help="Выводить номера строк")
+
+    # stats
+    cmd_stats = cmds.add_parser("stats", help="Подсчёт встречаемости слов")
+    cmd_stats.add_argument("--file", required=True, help="Исходный текст")
+    cmd_stats.add_argument("--k", type=int, default=5, help="Сколько слов вывести")
+
+    opt = parser.parse_args()
+
+    if opt.mode == "cat":
+        with open(opt.file, encoding="utf-8") as fh:
+            for idx, line in enumerate(fh, 1):
+                line = line.rstrip()
+                print(f"{idx}: {line}" if opt.nums else line)
+
+    elif opt.mode == "stats":
+        with open(opt.file, encoding="utf-8") as fh:
+            data = fh.read()
+        words = tokenize(data)
+        freq = count_freq(words)
+        for w, c in top_n(freq, opt.k):
+            print(f"{w}: {c}")
+
+
+if __name__ == "__main__":
+    main()
+```
+### Тесты
+#### Текст с номерами строк
+![фото1 6](./images/lab06/01.png)
+![фото1 6](./images/lab06/02.png)
+#### Текст с топом слов
+![фото1 6](./images/lab06/03.png)
+#### Помощь по командам
+![фото1 6](./images/lab06/04.png)
+![фото1 6](./images/lab06/05.png)
+#### Тесты по подкомандам
+![фото1 6](./images/lab06/06.png)
+![фото1 6](./images/lab06/07.png)
+![фото1 6](./images/lab06/08.png)
+#### Ошибки
+![фото1 6](./images/lab06/09.png)
+![фото1 6](./images/lab06/10.png)
