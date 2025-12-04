@@ -1052,3 +1052,155 @@ def test_csv_to_json_invalid(tmp_path):
 
 ### Проверка тестов с покрытием 
 ![фото1 7](./images/lab07/04.png)
+
+## Лабораторная работа 8
+
+### Задание 1
+
+```
+from dataclasses import dataclass
+from datetime import datetime, date
+
+
+@dataclass
+class Student:
+    full_name: str
+    birth_date: str
+    group: str
+    gpa: float
+
+    def __post_init__(self):
+        # Проверка формата даты
+        try:
+            datetime.strptime(self.birth_date, "%Y-%m-%d")
+        except ValueError:
+            raise ValueError("Некорректный формат даты (нужно YYYY-MM-DD)")
+
+        # Проверка диапазона GPA
+        if not isinstance(self.gpa, (float, int)):
+            raise TypeError("GPA должен быть числом")
+
+        if not (0 <= float(self.gpa) <= 5):
+            raise ValueError("GPA должен быть в диапазоне от 0 до 5")
+
+        self.gpa = float(self.gpa)
+
+    def age(self) -> int:
+        """Возвращает количество полных лет."""
+        birth = datetime.strptime(self.birth_date, "%Y-%m-%d").date()
+        today = date.today()
+
+        years = today.year - birth.year
+        if (today.month, today.day) < (birth.month, birth.day):
+            years -= 1
+
+        return years
+
+    def to_dict(self) -> dict:
+        """Сериализация объекта в словарь."""
+        return {
+            "fio": self.full_name,
+            "birthdate": self.birth_date,
+            "group": self.group,
+            "gpa": self.gpa
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        """Создание объекта из словаря."""
+        return cls(
+            full_name=data["fio"],
+            birth_date=data["birthdate"],
+            group=data["group"],
+            gpa=data["gpa"]
+        )
+
+    def __str__(self):
+        return f"{self.full_name} ({self.group}) — GPA: {self.gpa}"
+
+```
+
+### Задание 2
+
+```
+import json
+from .models import Student
+
+
+def students_to_json(students, path):
+    """Записывает список студентов в JSON-файл."""
+    if not isinstance(students, list):
+        raise TypeError("ожидался список объектов Student")
+
+    data = [s.to_dict() for s in students]
+
+    with open(path, "w", encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+
+def students_from_json(path):
+    """Читает JSON и возвращает список Student."""
+    with open(path, "r", encoding='utf-8') as f:
+        data = json.load(f)
+
+    if not isinstance(data, list):
+        raise TypeError("JSON должен содержать список")
+
+    student_list = []
+
+    for d in data:
+        if not isinstance(d, dict):
+            raise TypeError("элемент списка должен быть объектом")
+
+        # Простая типовая валидация
+        if not isinstance(d.get("fio"), str):
+            raise TypeError("fio должно быть str")
+        if not isinstance(d.get("birthdate"), str):
+            raise TypeError("birthdate должно быть str")
+        if not isinstance(d.get("group"), str):
+            raise TypeError("group должно быть str")
+        if not isinstance(d.get("gpa"), (float, int)):
+            raise TypeError("gpa должен быть числом")
+
+        # Создание объекта Student
+        try:
+            student = Student.from_dict(d)
+        except Exception:
+            raise ValueError("некорректные данные студента")
+
+        student_list.append(student)
+
+    return student_list
+
+
+if __name__ == "__main__":
+    inp = "data2/lab08/students_input.json"
+    out = "data2/lab08/students_output.json"
+
+    # читаем
+    students = students_from_json(inp)
+
+    # выводим
+    print("Загруженные студенты:")
+    for st in students:
+        print(st)
+
+    # записываем
+    students_to_json(students, out)
+
+    print("\nФайл успешно записан:", out)
+```
+### Проверка работы кода
+![фото1 8](./images/lab08/01.png)
+
+### тестовый инпут
+![фото1 7](./images/lab07/02.png)
+
+### Вывод после кода
+![фото1 7](./images/lab07/03.png)
+
+### Ошибка недопустимого количества баллов
+![фото1 7](./images/lab07/04.png)
+
+### Ошибка недопустимой даты рождения
+![фото1 7](./images/lab07/05.png)
