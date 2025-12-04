@@ -828,3 +828,227 @@ if __name__ == "__main__":
 #### Ошибки
 ![фото1 6](./images/lab06/09.png)
 ![фото1 6](./images/lab06/10.png)
+
+## Лабораторная работа 7
+
+### Задание 1
+
+```
+import pytest
+from src.lib.text import normalize, tokenize, count_freq, top_n
+
+
+# ------------------------- normalize -------------------------
+
+
+@pytest.mark.parametrize(
+    "src,expected",
+    [
+        ("HeLlo WOrld", "hello world"),
+        ("", ""),
+        ("TEST", "test"),
+        ("Hello\tWorld", "hello world"),
+        ("ПРивет\nМИр\t\t", "привет мир"),
+        ("ёжик, Ёлка", "ежик, елка"),
+    ],
+)
+def test_normalize_parametrized(src, expected):
+    assert normalize(src) == expected
+
+
+def test_normalize_control_characters_removed():
+    raw = "Hello\tWorld\nTest"
+    out = normalize(raw)
+
+    assert "\t" not in out
+    assert "\n" not in out
+    assert "  " not in out
+
+
+def test_normalize_yo_to_e():
+    text = "ёжик ёлка Ёлка Ёжик"
+    assert normalize(text) == "ежик елка елка ежик"
+
+
+# ------------------------- tokenize -------------------------
+
+
+@pytest.mark.parametrize(
+    "src,expected",
+    [
+        ("hello world test", ["hello", "world", "test"]),
+        ("", []),
+        ("emoji 😀 не слово", ["emoji", "не", "слово"]),
+        ("Meow_meow-", ["Meow_meow"]),
+        ("по-настоящему круто", ["по-настоящему", "круто"]),
+    ],
+)
+def test_tokenize_parametrized(src, expected):
+    assert tokenize(src) == expected
+
+
+# ------------------------- count_freq -------------------------
+
+
+@pytest.mark.parametrize(
+    "tokens,expected",
+    [
+        (["a", "b", "a", "c", "b", "a"], {"a": 3, "b": 2, "c": 1}),
+        ([" "], {" ": 1}),
+        (
+            ["bb", "aa", "bb", "aa", "cc"],
+            {"aa": 2, "bb": 2, "cc": 1},
+        ),
+        ([], {}),
+        (
+            ["a", "a", "b", "b", "c", "c", "1", "1", "f", "f", "f"],
+            {"1": 2, "a": 2, "b": 2, "c": 2, "f": 3},
+        ),
+    ],
+)
+def test_count_freq(tokens, expected):
+    assert count_freq(tokens) == expected
+
+
+# ------------------------- top_n -------------------------
+
+
+def test_top_n_basic():
+    freq = {"apple": 5, "banana": 3, "orange": 4, "grape": 2}
+    out = top_n(freq, 3)
+    assert out == [("apple", 5), ("orange", 4), ("banana", 3)]
+
+
+def test_top_n_tie_breaker_alphabetical():
+    freq = {"banana": 3, "apple": 3, "cherry": 3, "date": 2}
+    out = top_n(freq, 3)
+    assert out == [("apple", 3), ("banana", 3), ("cherry", 3)]
+
+
+def test_top_n_request_more_than_available():
+    freq = {"apple": 3, "banana": 2}
+    out = top_n(freq, 5)
+    assert out == [("apple", 3), ("banana", 2)]
+
+
+def test_top_n_zero_returns_empty():
+    assert top_n({"apple": 3, "banana": 2}, 0) == []
+
+
+@pytest.mark.parametrize(
+    "freq,n,expected",
+    [
+        ({}, 5, []),
+        ({"a": 1}, 0, []),
+        ({"a": 2, "b": 1}, 2, [("a", 2), ("b", 1)]),
+        ({"b": 1, "a": 1}, 2, [("a", 1), ("b", 1)]),
+    ],
+)
+def test_top_n_parametrized(freq, n, expected):
+    t top_n(freq, n) == expected
+```![img.png](img.png)
+![фото1 7](./images/lab07/01.png)
+```
+![фото1 7](./images/lab07/01.png)
+### Задание 2
+
+```
+import json
+from pathlib import Path
+import csv
+import pytest
+
+
+from src.lab05.json_csv import json_to_csv, csv_to_json
+
+
+# ------------------------- JSON → CSV -------------------------
+
+
+def test_json_to_csv_success(tmp_path):
+    """Корректный JSON → корректный CSV"""
+    source_data = [
+        {"name": "Alice", "age": 30, "city": "New York"},
+        {"name": "Bob", "age": 25, "city": "London"},
+    ]
+
+    src = tmp_path / "src.json"
+    dst = tmp_path / "result.csv"
+
+    src.write_text(json.dumps(source_data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    json_to_csv(str(src), str(dst))
+    assert dst.exists()
+
+    with open(dst, encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+
+    assert len(rows) == 2
+    assert rows[0]["name"] == "Alice"
+    assert rows[0]["age"] == "30"
+    assert rows[0]["city"] == "New York"
+    assert rows[1]["name"] == "Bob"
+
+
+def test_json_to_csv_nonexistent():
+    """Ошибка: входной файл не существует"""
+    with pytest.raises(FileNotFoundError):
+        json_to_csv("missing_file.json", "out.csv")
+
+
+def test_json_to_csv_broken_json(tmp_path):
+    """Ошибка: JSON повреждён"""
+    p = tmp_path / "invalid.json"
+    p.write_text("{ broken json }", encoding="utf-8")
+
+    with pytest.raises(ValueError):
+        json_to_csv(str(p), "output.csv")
+
+
+# ------------------------- CSV → JSON -------------------------
+
+
+def test_csv_to_json_success(tmp_path):
+    csv_data = [
+        ["name", "age", "city"],
+        ["Alice", "30", "New York"],
+        ["Bob", "25", "London"],
+    ]
+
+    src = tmp_path / "src.csv"
+    dst = tmp_path / "res.json"
+
+    with open(src, "w", encoding="utf-8", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerows(csv_data)
+
+    csv_to_json(str(src), str(dst))
+    assert dst.exists()
+
+    with open(dst, encoding="utf-8") as f:
+        parsed = json.load(f)
+
+    assert len(parsed) == 2
+    assert parsed[0] == {"name": "Alice", "age": "30", "city": "New York"}
+
+
+def test_csv_to_json_missing_file():
+    with pytest.raises(FileNotFoundError):
+        csv_to_json("not_exists.csv", "result.json")
+
+
+def test_csv_to_json_invalid(tmp_path):
+    """Ошибка: пустой CSV"""
+    csv_file = tmp_path / "empty.csv"
+    csv_file.write_text("", encoding="utf-8")
+
+    with pytest.raises(ValueError):
+        csv_to_json(str(csv_file), "output.json")
+```
+![фото1 7](./images/lab07/02.png)
+
+### Проверка силя на black
+![фото1 7](./images/lab07/03.png)
+
+### Проверка тестов с покрытием 
+![фото1 7](./images/lab07/04.png)

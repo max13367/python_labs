@@ -5,24 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="559069d1-32cf-459c-a1f4-fe34f783952b" name="Changes" comment="лаба5">
-      <change afterPath="$PROJECT_DIR$/images/lab06/01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab06/02.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab06/03.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab06/04.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab06/05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab06/06.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab06/07.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab06/08.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab06/09.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab06/10.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab06/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab06/cli_convert.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab06/cli_text.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab06/data/samples/people.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lab06/data/samples/text.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab07/01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab07/02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab07/03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lab07/04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/python_labs-main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python_labs-main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab05/csv_xlsx.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab05/csv_xlsx.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +40,7 @@
       </map>
     </option>
     <option name="RECENT_COMMON_BRANCH" value="main" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -58,12 +49,12 @@
     &quot;assignee&quot;: &quot;max13367&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;git@github.com:max13367/python_labs.git&quot;,
-    &quot;accountId&quot;: &quot;dcbfe3cf-4421-4c1b-9240-dacdd375b144&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/max13367/python_labs.git",
+    "accountId": "5e16c3ed-00a6-46d4-ac61-79f8a8fa3b89"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -77,6 +68,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests in test_json_csv.py.executor": "Run",
+    "Python tests.Python tests in test_text.py.executor": "Run",
     "Python.01 1.executor": "Run",
     "Python.01 2.executor": "Run",
     "Python.01.executor": "Run",
@@ -89,11 +82,12 @@
     "Python.io_txt_csv.executor": "Run",
     "Python.json_csv.executor": "Run",
     "Python.test_io.executor": "Run",
+    "Python.test_text.executor": "Run",
     "Python.text.executor": "Run",
     "Python.text_report.executor": "Run",
     "Python.text_stats.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/maksim/Desktop/python_labs"
   },
   "keyToStringList": {
@@ -104,6 +98,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\maksim\PycharmProjects\python_labs\src\lab07" />
       <recent name="C:\Users\maksim\Desktop\python_labs\src\lab05\data2\out" />
       <recent name="C:\Users\maksim\Desktop\python_labs\images\lab02" />
       <recent name="C:\Users\maksim\Desktop\python_labs\images\lab01" />
