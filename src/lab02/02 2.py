@@ -5,7 +5,7 @@ def transpose(a):
     first_riad = len(a[0])
     for i in a:
         if len(i) != first_riad:
-            return 'ValueError'
+            return "ValueError"
 
     result = []
     for stolb in range(len(a[0])):
@@ -16,6 +16,7 @@ def transpose(a):
 
     return result
 
+
 def row_sums(b):
     if not b:
         return []
@@ -23,12 +24,13 @@ def row_sums(b):
     first_riad = len(b[0])
     for i in b:
         if len(i) != first_riad:
-            return 'ValueError'
+            return "ValueError"
 
     result = []
     for row in b:
         result.append(sum(row))
     return result
+
 
 def col_sums(c):
     if not c:
@@ -37,7 +39,7 @@ def col_sums(c):
     first_riad = len(c[0])
     for i in c:
         if len(i) != first_riad:
-            return 'ValueError'
+            return "ValueError"
 
     result = []
     for stolb in range(len(c[0])):
@@ -48,20 +50,21 @@ def col_sums(c):
 
     return result
 
-print('transpose')
+
+print("transpose")
 print(transpose([[1, 2, 3]]))
 print(transpose([[1], [2], [3]]))
 print(transpose([[1, 2], [3, 4]]))
 print(transpose([]))
 print(transpose([[1, 2], [3]]))
 
-print('row_sums')
+print("row_sums")
 print(row_sums([[1, 2, 3], [4, 5, 6]]))
 print(row_sums([[-1, 1], [10, -10]]))
 print(row_sums([[0, 0], [0, 0]]))
 print(row_sums([[1, 2], [3]]))
 
-print('col_sums')
+print("col_sums")
 print(col_sums([[1, 2, 3], [4, 5, 6]]))
 print(col_sums([[-1, 1], [10, -10]]))
 print(col_sums([[0, 0], [0, 0]]))

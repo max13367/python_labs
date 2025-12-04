@@ -3,13 +3,17 @@ from src.lib.text import tokenize, count_freq, top_n
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Инструмент для работы с текстовыми файлами")
+    parser = argparse.ArgumentParser(
+        description="Инструмент для работы с текстовыми файлами"
+    )
     cmds = parser.add_subparsers(dest="mode")
 
     # cat
     cmd_cat = cmds.add_parser("cat", help="Показать файл целиком")
     cmd_cat.add_argument("--file", required=True, help="Файл для чтения")
-    cmd_cat.add_argument("-n", "--nums", action="store_true", help="Выводить номера строк")
+    cmd_cat.add_argument(
+        "-n", "--nums", action="store_true", help="Выводить номера строк"
+    )
 
     # stats
     cmd_stats = cmds.add_parser("stats", help="Подсчёт встречаемости слов")

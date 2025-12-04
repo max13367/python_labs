@@ -1,6 +1,6 @@
 str_ = str(input())
 
-newstr_ = ''
+newstr_ = ""
 index_first = -1
 index_second = -1
 index_last = -1
@@ -17,9 +17,9 @@ for i in range(len(str_) - 1):
 
 for i in str_:
     index_last += 1
-    if i == '.':
+    if i == ".":
         break
-        
+
 
 shag = index_second - index_first
 

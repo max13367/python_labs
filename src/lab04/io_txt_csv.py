@@ -2,6 +2,7 @@ from pathlib import Path
 import csv
 from typing import Iterable, Sequence
 
+
 def read_text(path: str | Path, encoding: str = "utf-8") -> str:
     """Считывает текст из .txt файла"""
     p = Path(path)
@@ -15,7 +16,9 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
         raise UnicodeDecodeError("Ошибка декодирования. Попробуйте другую кодировку.")
 
 
-def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...] | None = None) -> None:
+def write_csv(
+    rows: list[tuple | list], path: str | Path, header: tuple[str, ...] | None = None
+) -> None:
     p = Path(path)
     if p.suffix.lower() != ".csv":
         raise ValueError("Неправильный формат — требуется файл с расширением .csv")
@@ -38,6 +41,7 @@ def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...
         for r in rows:
             w.writerow(r)
 
+
 # Тестовые задания
 
 if __name__ == "__main__":
@@ -49,7 +53,7 @@ if __name__ == "__main__":
     # Задание B
     def print_csv(path):
         p = Path(path)
-        with p.open('r', encoding='utf-8') as f:
+        with p.open("r", encoding="utf-8") as f:
             for line in f:
                 print(line.strip())
 
@@ -66,8 +70,10 @@ if __name__ == "__main__":
     print("Создан CSV:", csv_path)
 
     try:
-        (Path("data") / "1251input.txt").write_text("Привет из cp1251", encoding="cp1251")
-        str_cp1251 = read_text("data/1251input.txt", encoding='cp1251')
+        (Path("data") / "1251input.txt").write_text(
+            "Привет из cp1251", encoding="cp1251"
+        )
+        str_cp1251 = read_text("data/1251input.txt", encoding="cp1251")
         print("Прочитано из cp1251:", str_cp1251)
     except Exception as e:
         print("Ошибка при чтении cp1251 файла:", e)

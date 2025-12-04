@@ -1,21 +1,34 @@
+import re
 
-def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
-    text = re.sub(r'\s+', ' ', text).strip()
-    if casefold:
-        text = text.casefold()
-    if yo2e:
-        text = text.replace('ё', 'e')
+
+def normalize(text: str) -> str:
+    if not isinstance(text, str):
+        raise TypeError("text must be string")
+
+    # нижний регистр
+    text = text.lower()
+
+    # замена ё → е (по-русски)
+    text = text.replace("ё", "е")
+
+    # переводы строк/табов → пробелы
+    text = re.sub(r"[\n\r\t]+", " ", text)
+
+    # один пробел между словами
+    text = re.sub(r"\s+", " ", text).strip()
+
     return text
+
 
 import re
 
-def tokenize(text: str) -> list[str]:
-    shablon = r'\w+(?:-\w+)*'
-    tockens = (re.findall(shablon, normalize(text)))
-    return tockens
+import re
 
-testcase1 = ["a", "b", "a", "c", "b", "a"]
-testcase2 = ["bb", "aa", "bb", "aa", "cc"]
+
+def tokenize(text: str) -> list[str]:
+
+    tokens = re.findall(r"[A-Za-zА-Яа-я0-9_]+(?:-[A-Za-zА-Яа-я0-9_]+)*", text)
+    return tokens
 
 
 def count_freq(tokens: list[str]) -> dict[str, int]:
@@ -26,6 +39,7 @@ def count_freq(tokens: list[str]) -> dict[str, int]:
         else:
             fdict[token] = 1
     return fdict
+
 
 def top_n(freq: dict[str, int], n: int = 2) -> list[tuple[str, int]]:
     items = list(freq.items())

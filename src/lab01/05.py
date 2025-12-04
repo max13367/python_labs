@@ -1,9 +1,9 @@
 fio_input = input()
-fio_new = ' '.join(fio_input.split())
+fio_new = " ".join(fio_input.split())
 
 words = fio_new.split()
 
-initials = ''.join([word[0].upper() for word in words])
+initials = "".join([word[0].upper() for word in words])
 
 length = len(fio_new)
 
