@@ -134,11 +134,11 @@ people = Group("../../data2/lab09/students.csv")
 #print(people.list())
 
 #people.add(Student("Батраченко Максим Иванович", "2007-06-18", "БИВТ-25-7", 4.6))
-
+#print(people.list())
 #print(people.find("Макс"))
 
 #people.remove("Батраченко Максим Иванович")
 
-#people.update("Попов Сергей Михайлович", gpa="5.0")
+people.update("Попов Сергей Михайлович", gpa="4.7")
 
-#print(people.stats())
+print(people.stats())

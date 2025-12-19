@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="559069d1-32cf-459c-a1f4-fe34f783952b" name="Changes" comment="лаба7">
-      <change afterPath="$PROJECT_DIR$/data2/lab09/students.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab09/01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab09/02.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/lab09/03.png" afterDir="false" />
+    <list default="true" id="559069d1-32cf-459c-a1f4-fe34f783952b" name="Changes" comment="лаба9">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data2/lab08/students_input.json" beforeDir="false" afterPath="$PROJECT_DIR$/data2/lab08/students_input.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data2/lab08/students_output.json" beforeDir="false" afterPath="$PROJECT_DIR$/data2/lab08/students_output.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data2/lab09/students.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data2/lab09/students.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,39 +60,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests in test_json_csv.py.executor": "Run",
-    "Python tests.Python tests in test_text.py.executor": "Run",
-    "Python.01 1.executor": "Run",
-    "Python.01 2.executor": "Run",
-    "Python.01.executor": "Run",
-    "Python.02 2.executor": "Run",
-    "Python.02.executor": "Run",
-    "Python.03 2.executor": "Run",
-    "Python.cli_convert.executor": "Run",
-    "Python.cli_text.executor": "Run",
-    "Python.csv_xlsx.executor": "Run",
-    "Python.group.executor": "Run",
-    "Python.io_txt_csv.executor": "Run",
-    "Python.json_csv.executor": "Run",
-    "Python.models.executor": "Run",
-    "Python.serialize.executor": "Run",
-    "Python.test_io.executor": "Run",
-    "Python.test_text.executor": "Run",
-    "Python.text.executor": "Run",
-    "Python.text_report.executor": "Run",
-    "Python.text_stats.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/maksim/Desktop/python_labs"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests in test_json_csv.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_text.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.01 1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.01 2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.01.executor&quot;: &quot;Run&quot;,
+    &quot;Python.02 2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.02.executor&quot;: &quot;Run&quot;,
+    &quot;Python.03 2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.cli_convert.executor&quot;: &quot;Run&quot;,
+    &quot;Python.cli_text.executor&quot;: &quot;Run&quot;,
+    &quot;Python.csv_xlsx.executor&quot;: &quot;Run&quot;,
+    &quot;Python.group.executor&quot;: &quot;Run&quot;,
+    &quot;Python.io_txt_csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.json_csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.models.executor&quot;: &quot;Run&quot;,
+    &quot;Python.serialize.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_io.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_text.executor&quot;: &quot;Run&quot;,
+    &quot;Python.text.executor&quot;: &quot;Run&quot;,
+    &quot;Python.text_report.executor&quot;: &quot;Run&quot;,
+    &quot;Python.text_stats.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/maksim/Desktop/python_labs&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "PLAIN_TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;PLAIN_TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\maksim\PycharmProjects\python_labs\src\lab07" />
@@ -203,7 +197,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764872139424</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="лаба9">
+      <option name="closed" value="true" />
+      <created>1765496361000</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1765496361000</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -215,6 +217,7 @@
     <MESSAGE value="лаба4" />
     <MESSAGE value="лаба5" />
     <MESSAGE value="лаба7" />
-    <option name="LAST_COMMIT_MESSAGE" value="лаба7" />
+    <MESSAGE value="лаба9" />
+    <option name="LAST_COMMIT_MESSAGE" value="лаба9" />
   </component>
 </project>
